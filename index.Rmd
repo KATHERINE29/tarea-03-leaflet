@@ -1,6 +1,6 @@
 ---
 title: "PF-0953 Programación geoespacial en R<br>Tarea 03: Leaflet"
-author: "Katherine Urbina y Jorge Masis"
+author: "Katherine Urbina, Jorge Masis y Dania Zuñiga"
 date: "2020-11-03"
 output:
   html_document:
@@ -178,7 +178,7 @@ df_activos_cantones_ultima_fecha <-
 ### Mapas
 ```{r}
 
-  leaflet (sf_COVID19_cantones_total) %>% 
+ leaflet (sf_COVID19_cantones_total) %>% 
     fitBounds(lng1 = -86, lng2 = -82, lat1 = 8, lat2 = 11) %>%
     addProviderTiles(providers$OpenStreetMap.Mapnik, group = "OpenStreetMap") %>%
     addProviderTiles(providers$Esri.WorldTopoMap, group = "EsriTopoMap") %>%
@@ -187,55 +187,55 @@ df_activos_cantones_ultima_fecha <-
                 color="black", weight=0.2, opacity= 0.5,
                 group = "Fallecidos",
                 popup = paste(
-                  "Provincia: ", sf_COVID19_cantones_total$provincia, "<br>",
-                  "Cantón: ", sf_COVID19_cantones_total$canton, "<br>",
-                  "Fallecidos: ", sf_COVID19_cantones_total$fallecidos
+                    "Provincia: ", sf_COVID19_cantones_total$provincia, "<br>",
+                    "Cantón: ", sf_COVID19_cantones_total$canton, "<br>",
+                    "Fallecidos: ", sf_COVID19_cantones_total$fallecidos
                 )) %>%
     addPolygons(fillColor = ~paleta_rojo(activos), stroke=T, fillOpacity = 1,
                 color="black", weight=0.2, opacity= 0.5,
                 group = "Activos",
                 popup = paste(
-                  "Provincia: ", sf_COVID19_cantones_total$provincia, "<br>",
-                  "Cantón: ", sf_COVID19_cantones_total$canton, "<br>",
-                  "Activos: ", sf_COVID19_cantones_total$activos
+                    "Provincia: ", sf_COVID19_cantones_total$provincia, "<br>",
+                    "Cantón: ", sf_COVID19_cantones_total$canton, "<br>",
+                    "Activos: ", sf_COVID19_cantones_total$activos
                 ) )%>%
     addPolygons(fillColor = ~paleta_verde(recuperados), stroke=T, fillOpacity = 1,
                 color="black", weight=0.2, opacity= 0.5,
                 group = "Recuperados",
                 popup = paste(
-                  "Provincia: ", sf_COVID19_cantones_total$provincia, "<br>",
-                  "Cantón: ", sf_COVID19_cantones_total$canton, "<br>",
-                  "Recuperados: ", sf_COVID19_cantones_total$recuperados
+                    "Provincia: ", sf_COVID19_cantones_total$provincia, "<br>",
+                    "Cantón: ", sf_COVID19_cantones_total$canton, "<br>",
+                    "Recuperados: ", sf_COVID19_cantones_total$recuperados
                 ) )%>% 
     addPolygons(fillColor = ~paleta_morado(positivos), stroke=T, fillOpacity = 1,
                 color="black", weight=0.2, opacity= 0.5,
                 group = "Positivos",
                 popup = paste(
-                  "Provincia: ", sf_COVID19_cantones_total$provincia, "<br>",
-                  "Cantón: ", sf_COVID19_cantones_total$canton, "<br>",
-                  "Positivos: ", sf_COVID19_cantones_total$positivos
+                    "Provincia: ", sf_COVID19_cantones_total$provincia, "<br>",
+                    "Cantón: ", sf_COVID19_cantones_total$canton, "<br>",
+                    "Positivos: ", sf_COVID19_cantones_total$positivos
                 ) )%>%
     addLegend("bottomleft", pal = paleta_azul, values = ~fallecidos,
               title = "Casos fallecidos",
               opacity = 1)%>%
-    addLegend("bottomright", pal = paleta_rojo, values = ~activos,
+    addLegend("bottomleft", pal = paleta_rojo, values = ~activos,
               title = "Casos activos",
               opacity = 1
     ) %>% 
-    addLegend("topright", pal = paleta_verde, values = ~recuperados,
+    addLegend("bottomright", pal = paleta_verde, values = ~recuperados,
               title = "Casos recuperados",
               opacity = 1
-    ) %>%  addLegend("topleft", pal = paleta_morado, values = ~positivos,
+    ) %>%  addLegend("bottomright", pal = paleta_morado, values = ~positivos,
                      title = "Casos positivos",
                      opacity = 1
     ) %>%  
     addLayersControl(
-      baseGroups = c("OpenStreetMap", "EsriTopoMap", "NASAModis"),
-      overlayGroups = c("Fallecidos", "Activos", "Positivos", "Recuperados"),
-      options = layersControlOptions(collapsed = TRUE)    
+        baseGroups = c("OpenStreetMap", "EsriTopoMap", "NASAModis"),
+        overlayGroups = c("Fallecidos", "Activos", "Positivos", "Recuperados"),
+        options = layersControlOptions(collapsed = TRUE)    
     ) %>%  
     addMiniMap(
-      toggleDisplay = TRUE,
-      position = "bottomleft",
-      tiles = providers$OpenStreetMap.Mapnik)
+        toggleDisplay = TRUE,
+        position = "bottomleft",
+        tiles = providers$OpenStreetMap.Mapnik)
 ```
