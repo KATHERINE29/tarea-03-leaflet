@@ -165,7 +165,7 @@ df_activos_cantones_ultima_fecha <-
 ## Escala/rangos
 ```{r}   
   bins <- c(0, 100, 500, 1000, 2000, Inf)
-  bins2 <- c(0, 5, 10, 50, 150, Inf)
+  bins2 <- c(0, 10, 50, 150, 200, Inf)
 ```    
 ## Colores
 ```{r} 
@@ -175,7 +175,7 @@ df_activos_cantones_ultima_fecha <-
   paleta_morado <- colorBin("RdPu", domain = sf_COVID19_cantones_total$positivos, bins = bins)  
   paleta_verde <- colorBin("Greens", domain = sf_COVID19_cantones_total$recuperados, bins = bins)
 ```    
-### Mapas
+### Mapas de Coropletas para casos activos, positivos, recuperados y fallecidos de COVID-19 según cantón, al día 27/10/2020 en Costa Rica
 ```{r}
 
  leaflet (sf_COVID19_cantones_total) %>% 
@@ -225,7 +225,7 @@ df_activos_cantones_ultima_fecha <-
     addLegend("bottomright", pal = paleta_verde, values = ~recuperados,
               title = "Casos recuperados",
               opacity = 1
-    ) %>%  addLegend("bottomright", pal = paleta_morado, values = ~positivos,
+    ) %>%  addLegend("bottomleft", pal = paleta_morado, values = ~positivos,
                      title = "Casos positivos",
                      opacity = 1
     ) %>%  
@@ -236,6 +236,6 @@ df_activos_cantones_ultima_fecha <-
     ) %>%  
     addMiniMap(
         toggleDisplay = TRUE,
-        position = "bottomleft",
+        position = "topright",
         tiles = providers$OpenStreetMap.Mapnik)
 ```
